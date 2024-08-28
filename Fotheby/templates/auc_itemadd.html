@@ -1,0 +1,18 @@
+<!-- auctionitem_add.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Auction Item</title>
+</head>
+<body>
+    <h2>Add Auction Item</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Item</button>
+    </form>
+</body>
+</html>

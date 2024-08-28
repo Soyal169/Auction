@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title %} Item Add {% endblock %}
+
+{% block boody %}
+    <!-- Add Bootstrap CSS link (adjust the path accordingly) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Set a light background color */
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #007bff; /* Set a primary color for the heading */
+        }
+
+        form {
+            background-color: #ffffff; /* Set a white background for the form */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        button {
+            background-color: #007bff; /* Set the button color to primary */
+            color: #ffffff; /* Set the text color to white */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style form elements (adjust as needed) */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Create Item</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary btn-block">Save Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Add Bootstrap JS and Popper.js scripts (adjust the paths accordingly) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+{% endblock %}

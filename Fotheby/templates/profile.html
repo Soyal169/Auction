@@ -1,0 +1,12 @@
+<!-- profile.html -->
+
+
+{% block content %}
+  <h1>{{ request.user }}</h1>
+  <p>Bio: {{ request.user.email }}</p>
+  <!-- Add other profile information as needed -->
+
+  {% if user_profile.user == request.user %}
+    <!-- If the current user is viewing their own profile, provide options to edit -->
+  {% endif %}
+{% endblock %}

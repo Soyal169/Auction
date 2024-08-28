@@ -1,0 +1,22 @@
+<!-- auctionitem_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Item List</title>
+</head>
+<body>
+    <h2>Auction Item</h2>
+    <ul>
+        <a href="/auc_itemadd"><button>Add Acution Item</button></a>
+        {% for auctionitem in auctionitems %}
+            <li>{{ auctionitem.lot_number }} - {{ auctionitem.item_id.name }} 
+                - <a href="{% url 'auc_itemedit' item_id=auctionitem.id %}">Edit</a> 
+                - <a href="{% url 'auc_itemdelete' item_id=auctionitem.id %}">Delete</a> 
+
+        {% endfor %}
+    </ul>
+</body>
+</html>

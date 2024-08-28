@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %} {% endblock %}</title>
+
+  <style>
+    .search-bar-container {
+        width: 50%;
+        background-color: #fff; /* Set the background color of the search bar */
+        border-radius: 5px; /* Optional: Add rounded corners */
+        overflow: hidden; /* Hide overflow content (if any) */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for better visual appeal */
+        margin-left: -49%; /* Adjust margin-left to position the search bar on the left side */
+    }
+
+    .search-bar-container form {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .search-bar-container input {
+        flex-grow: 2;
+        border: none;
+        border-radius: 5px 0 0 5px; /* Optional: Add rounded corners */
+    }
+
+    .search-bar-container button {
+        border: none;
+        border-radius: 0 5px 5px 0; /* Optional: Add rounded corners */
+    }
+    .auction-container {
+        height: 300px; /* Adjust the height as needed */
+        overflow-y: auto;
+    }
+    .btn-group .btn {
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-group .btn:hover {
+            background-color: #6c757d; /* Change color on hover */
+        }
+
+        /* Styles for dropdown text */
+        .nav-link.dropdown-toggle.text-dark {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Adjustments for Signup and Login buttons */
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+</style>
+{% load static %}
+
+<link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+<link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+
+  <!-- =======================================================
+  * Template Name: BizLand
+  * Updated: Jan 09 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <h1 class="logo"><a href="/auction">Fotheby's Auction<span>.</span></a></h1>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="/auction">Auction</a></li>
+                    <li><a class="nav-link scrollto" href="/item">Items</a></li>
+                </ul>
+            </nav><!-- .navbar -->
+
+            {% if user.is_authenticated %}
+            <div class="btn-group">
+                <a type="button" class="nav-link dropdown-toggle text-dark fw-bold" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Welcome, {{ request.user }}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/admin">View Dashboard</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="btn-group">
+                <a href="{% url 'to_register' %}" class="btn btn-success">Sign Up</a>
+                <a href="{% url 'to_login' %}" class="btn btn-primary">Login</a>
+            </div>
+            {% endif %}
+
+        </div>
+    </header>
+    <div class="container">
+        <!-- Displaying messages -->
+        {% if messages %}{% csrf_token %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+      </div>
+<br><br>
+
+  <!-- End Header -->
+  {% block boody %} {% endblock %}
+
+  <!-- ======= Hero Section ======= -->
+
+<!-- End Hero -->
+
+
+  <!-- End #main -->
+
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script> 
+
+  <script>
+      // JavaScript for button hover effects
+      const buttons = document.querySelectorAll('.btn-group .btn');
+
+      buttons.forEach(button => {
+          button.addEventListener('mouseover', function () {
+              this.style.backgroundColor = '#6c757d'; // Change color on hover
+          });
+
+          button.addEventListener('mouseout', function () {
+              this.style.backgroundColor = ''; // Reset color on mouseout
+          });
+      });
+  </script>
+
+</body>
+
+</html>

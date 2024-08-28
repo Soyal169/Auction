@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% block title %} Item View Page {% endblock %}
+
+{% block boody %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ item.name }}</h1>
+            <p>Description: {{ item.description }}</p>
+            <p>Price: ${{ item.price }}</p>
+            <p>Artist: {{ item.artist }}</p>
+            <p>Commission: {{ item.commission }}</p>
+            <p>Date: {{ item.date }}</p>
+            <p>Category: {{ item.category.name }}</p>
+            <p>Bid:
+                {% if bids %}
+                    {% with highest_bid=bids|first %}
+                        ${{ highest_bid.bid_amount }}
+                    {% endwith %}
+                {% else %}
+                    No bids yet.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Bidding Section</h2>
+
+            <form method="post" action="{% url 'bid_add' myid=item.id %}">
+                {% csrf_token %}
+                <label for="bid_amount">Bid Amount</label>
+                <input type="number" name="bid_amount" id="bid_amount" required>
+                <button type="submit" class="btn btn-primary">Place Bid</button>
+            </form>
+        </div>
+    </div>
+
+    {% if item.category.name == 'Drawings' %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Drawing Details</h2>
+            <p>Drawing Medium: {{ item.drawing_medium }}</p>
+            <p>Is Framed: {{ item.framed }}</p>
+            <p>Dimensions: {{ item.dimensions }}</p>
+        </div>
+    </div>
+{% elif item.category.name == 'Paintings' %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Painting Details</h2>
+            <p>Medium Used: {{ item.painting_medium }}</p>
+            <p>Is Framed: {{ item.framed }}</p>
+            <p>Dimensions: {{ item.dimensions }}</p>
+        </div>
+    </div>
+{% elif item.category.name == 'Photographic Images' %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Photographic Image Details</h2>
+            <p>Type of Image: {{ item.image_type }}</p>
+            <p>Dimensions: {{ item.dimensions }}</p>
+        </div>
+    </div>
+{% elif item.category.name == 'Sculptures' %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Sculpture Details</h2>
+            <p>Material Used: {{ item.material_used }}</p>
+            <p>Dimensions: {{ item.dimensions }}</p>
+            <p>Approximate Weight: {{ item.weight }} Kg</p>
+        </div>
+    </div>
+{% elif item.category.name == 'Carvings' %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Carving Details</h2>
+            <p>Material Used: {{ item.material_used }}</p>
+            <p>Dimensions: {{ item.dimensions }}</p>
+            <p>Approximate Weight: {{ item.weight }} Kg</p>
+        </div>
+    </div>
+{% endif %}
+
+</div>
+
+{% endblock %}
